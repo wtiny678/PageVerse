@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>EBook Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+body{
+  background:#050816;
+  color:white;
+  overflow-x:hidden;
+}
+
+/* NAVBAR */
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 60px;
+  position:fixed;
+  width:100%;
+  top:0;
+  z-index:10;
+  background:rgba(5,8,22,0.6);
+  backdrop-filter:blur(10px);
+}
+.logo{
+  font-size:28px;
+  font-weight:800;
+  background:linear-gradient(90deg,#38bdf8,#a78bfa);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+.nav-btns button{
+  margin-left:10px;
+  padding:10px 22px;
+  border-radius:30px;
+  border:none;
+  cursor:pointer;
+  font-weight:600;
+  background:linear-gradient(90deg,#22c55e,#4ade80);
+  box-shadow:0 0 15px rgba(34,197,94,.7);
+  transition:.3s;
+}
+.nav-btns button:nth-child(2){
+  background:linear-gradient(90deg,#3b82f6,#60a5fa);
+  box-shadow:0 0 15px rgba(59,130,246,.7);
+}
+.nav-btns button:nth-child(3){
+  background:linear-gradient(90deg,#facc15,#fde047);
+  color:black;
+  box-shadow:0 0 15px rgba(250,204,21,.7);
+}
+.nav-btns button:hover{
+  transform:scale(1.1);
+}
+
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:40px;
+  background:
+    linear-gradient(rgba(5,8,22,.7),rgba(5,8,22,.9)),
+    url("../images/slide1.jpg") center/cover;
+  animation:slideshow 15s infinite;
+}
+.hero-box{
+  background:rgba(255,255,255,0.08);
+  border-radius:25px;
+  padding:60px;
+  backdrop-filter:blur(20px);
+  box-shadow:0 0 40px rgba(99,102,241,.5);
+  animation:float 6s ease-in-out infinite;
+}
+.hero h1{
+  font-size:60px;
+  font-weight:800;
+  background:linear-gradient(90deg,#38bdf8,#a78bfa,#22c55e);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+.hero p{
+  margin-top:15px;
+  font-size:20px;
+  color:#c7d2fe;
+}
+
+/* BUTTONS */
+.hero-btns{
+  margin-top:30px;
+}
+.hero-btns button{
+  padding:14px 34px;
+  margin:10px;
+  border-radius:40px;
+  border:none;
+  cursor:pointer;
+  font-size:16px;
+  font-weight:600;
+  transition:.3s;
+}
+.hero-btns button:nth-child(1){
+  background:linear-gradient(90deg,#22c55e,#4ade80);
+  box-shadow:0 0 20px rgba(34,197,94,.8);
+}
+.hero-btns button:nth-child(2){
+  background:linear-gradient(90deg,#3b82f6,#60a5fa);
+  box-shadow:0 0 20px rgba(59,130,246,.8);
+}
+.hero-btns button:nth-child(3){
+  background:linear-gradient(90deg,#facc15,#fde047);
+  color:black;
+  box-shadow:0 0 20px rgba(250,204,21,.8);
+}
+.hero-btns button:hover{
+  transform:translateY(-5px) scale(1.05);
+}
+
+/* ANIMATIONS */
+@keyframes slideshow{
+  0%{background-image:
+    linear-gradient(rgba(5,8,22,.7),rgba(5,8,22,.9)),
+    url("../images/slide1.jpg");}
+  50%{background-image:
+    linear-gradient(rgba(5,8,22,.7),rgba(5,8,22,.9)),
+    url("../images/slide2.jpg");}
+  66%{background-image:
+    linear-gradient(rgba(5,8,22,.7),rgba(5,8,22,.9)),
+    url("../images/slide3.jpg");}
+  100%{background-image:
+    linear-gradient(rgba(5,8,22,.7),rgba(5,8,22,.9)),
+    url("../images/slide1.jpg");}
+}
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:15px;
+  background:#020617;
+  color:#94a3b8;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">📚 PageVerse</div>
+  <div class="nav-btns">
+    <button onclick="goLogin()">Login</button>
+    <button onclick="goRegister()">Register</button>
+    <button onclick="goSearch()">Search Book</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-box">
+    <h1>Read. Write. Earn.</h1>
+    <p>
+      Create stunning manga & novels,  
+      publish them online and earn from readers worldwide.
+    </p>
+    <div class="hero-btns">
+      <button onclick="goLogin()">Login</button>
+      <button onclick="goRegister()">Register</button>
+      <button onclick="goSearch()">Search Books</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 PageVerse | Stories that move the world
+</footer>
+
+<script>
+function goLogin(){ location.href="login.html"; }
+function goRegister(){ location.href="register.html"; }
+function goSearch(){ location.href="search.html"; }
+</script>
+
+</body>
+</html>

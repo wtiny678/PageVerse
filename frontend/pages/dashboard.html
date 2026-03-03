@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard | MangaVerse</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="icon" href="./favicon.ico.png" type="image/x-icon">
+
+
+<style>
+  :root{
+  --bg-dark:#030617;
+  --bg-card:#0b1026;
+  --neon:#38bdf8;
+  --purple:#a78bfa;
+  --green:#22c55e;
+  --danger:#ef4444;
+  --text-soft:#cbd5f5;
+}
+
+/* BODY BACKGROUND */
+body{
+  background:
+    radial-gradient(circle at top, #0b1435, #030617);
+  color:white;
+}
+
+/* PROFILE + BOXES */
+.profile,
+.stat-box,
+.card{
+  background:linear-gradient(145deg,#0b1026,#070b1d);
+  border:1px solid rgba(56,189,248,.15);
+}
+#creatorModal{
+display:none;
+}
+
+/* SECTION TITLES */
+.section h3{
+  color:#e0e7ff;
+  background:linear-gradient(90deg,#38bdf8,#a78bfa);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+/* STATS NUMBERS */
+.stat-box h2{
+  color:#38bdf8;
+}
+.stat-box p{
+  color:var(--text-soft);
+}
+
+/* INPUTS */
+#uploadBookSection input,
+#uploadBookSection select{
+  background:#070b1d;
+  border:1px solid rgba(167,139,250,.3);
+}
+#uploadBookSection input:focus{
+  border-color:#38bdf8;
+  box-shadow:0 0 12px rgba(56,189,248,.8);
+}
+
+/* BUTTON VARIANTS */
+.switch-btn{
+  background:linear-gradient(90deg,#22c55e,#4ade80);
+  color:#022c22;
+}
+
+header button{
+  background:linear-gradient(90deg,#ef4444,#f87171);
+}
+
+/* NAV BAR CONTRAST */
+nav{
+  background:linear-gradient(180deg,#020617,#030a1f);
+  border-top:1px solid rgba(56,189,248,.2);
+}
+nav a{
+  color:#c7d2fe;
+}
+nav a:hover{
+  color:black;
+}
+
+/* CARD TEXT */
+.card p{
+  color:#e5e7eb;
+}
+.card small{
+  color:#94a3b8;
+}
+
+:root{
+  --neon:#38bdf8;
+  --purple:#a78bfa;
+  --green:#22c55e;
+  --bg:#050816;
+}
+
+*{
+  transition:all .3s ease;
+}
+
+body{
+  background:radial-gradient(circle at top,#0b122b,#050816);
+  color:white;
+  font-family:'Poppins',sans-serif;
+  margin:0;
+  padding:0;
+}
+
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 40px;
+  background:rgba(10,15,40,.6);
+  backdrop-filter:blur(12px);
+  position:sticky;
+  top:0;
+  z-index:10;
+  box-shadow:0 0 20px rgba(56,189,248,.2);
+}
+header h2{
+  background:linear-gradient(90deg,#38bdf8,#a78bfa,#22c55e);
+  -webkit-background-clip:text;
+  color:transparent;
+  margin:0;
+  text-shadow:0 0 15px rgba(56,189,248,.6);
+}
+header button{
+  padding:10px 22px;
+  border:none;
+  border-radius:25px;
+  background:linear-gradient(90deg,#ef4444,#f87171);
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 0 15px rgba(239,68,68,.6);
+}
+header button:hover{
+  transform:scale(1.08);
+  box-shadow:0 0 25px rgba(239,68,68,.9);
+}
+
+/* PROFILE */
+.container{padding:30px;}
+.profile{
+  background:rgba(255,255,255,.06);
+  padding:25px;
+  border-radius:20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  box-shadow:0 0 25px rgba(56,189,248,.15);
+}
+.profile span{color:var(--neon);}
+.switch-btn{
+  padding:10px 22px;
+  border:none;
+  border-radius:25px;
+  background:linear-gradient(90deg,var(--green),#4ade80);
+  color:black;
+  font-weight:600;
+  cursor:pointer;
+  margin-top:10px;
+  box-shadow:0 0 15px rgba(34,197,94,.7);
+}
+.switch-btn:hover{
+  transform:translateY(-3px) scale(1.05);
+  box-shadow:0 0 25px rgba(34,197,94,1);
+}
+/* COMMON BUTTON STYLE */
+.action-btn{
+  border:none;
+  padding:6px 14px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  margin:4px 2px;
+  transition:0.3s ease;
+}
+
+/* READ BUTTON */
+.read-btn{
+  background:linear-gradient(90deg,#22c55e,#4ade80);
+  color:#022c22;
+  box-shadow:0 0 12px rgba(34,197,94,.7);
+}
+.read-btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 25px rgba(34,197,94,1);
+}
+
+/* BUY BUTTON */
+.buy-btn{
+  background:linear-gradient(90deg,#38bdf8,#60a5fa);
+  color:#020617;
+  box-shadow:0 0 12px rgba(56,189,248,.7);
+}
+.buy-btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 25px rgba(56,189,248,1);
+}
+
+/* DELETE BUTTON */
+.delete-btn{
+  background:linear-gradient(90deg,#ef4444,#f87171);
+  color:white;
+  box-shadow:0 0 12px rgba(239,68,68,.7);
+}
+.delete-btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 25px rgba(239,68,68,1);
+}
+
+/* STATS */
+.stats{
+  margin-top:25px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:20px;
+}
+.stat-box{
+  background:rgba(255,255,255,.05);
+  padding:20px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 0 20px rgba(56,189,248,.15);
+}
+.stat-box:hover{
+  transform:translateY(-6px);
+  box-shadow:0 0 35px rgba(56,189,248,.5);
+}
+.stat-box h2{
+  color:var(--neon);
+  margin:0;
+  text-shadow:0 0 10px rgba(56,189,248,.8);
+}
+
+/* SECTIONS */
+.section{margin-top:35px;}
+.section h3{
+  border-left:5px solid var(--neon);
+  padding-left:10px;
+  margin-bottom:15px;
+  text-shadow:0 0 10px rgba(56,189,248,.6);
+}
+
+/* GRID CARDS */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:15px;
+}
+.card{
+  background:rgba(255,255,255,.06);
+  border-radius:15px;
+  padding:10px;
+  text-align:center;
+  box-shadow:0 0 20px rgba(167,139,250,.15);
+}
+.card:hover{
+  transform:translateY(-8px) scale(1.03);
+  box-shadow:0 0 40px rgba(167,139,250,.7);
+}
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:10px;
+}
+.card p{
+  margin-top:8px;
+  font-size:14px;
+}
+.card small{
+  display:block;
+  margin-top:4px;
+  color:#a1a1aa;
+}
+
+/* INPUTS */
+#uploadBookSection .input-group{
+  margin-bottom:12px;
+}
+#uploadBookSection label{
+  display:block;
+  margin-bottom:6px;
+  color:#c7d2fe;
+}
+#uploadBookSection input,
+#uploadBookSection select{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  background:rgba(255,255,255,.12);
+  color:white;
+  outline:none;
+  box-shadow:inset 0 0 10px rgba(56,189,248,.2);
+}
+#uploadBookSection input:focus{
+  box-shadow:0 0 15px rgba(56,189,248,.7);
+}
+#coverPreview{
+  width:120px;
+  margin-top:10px;
+  border-radius:10px;
+  display:none;
+  box-shadow:0 0 20px rgba(56,189,248,.6);
+}
+
+/* NAV */
+nav{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  background:rgba(2,6,23,.9);
+  display:flex;
+  justify-content:space-around;
+  padding:10px 0;
+  box-shadow:0 0 20px rgba(56,189,248,.2);
+}
+nav a{
+  color:white;
+  text-decoration:none;
+  font-size:14px;
+  padding:6px 14px;
+  border-radius:20px;
+}
+nav a:hover{
+  background:linear-gradient(90deg,#38bdf8,#a78bfa);
+  box-shadow:0 0 20px rgba(56,189,248,.8);
+  transform:scale(1.1);
+}
+.creator-modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.85);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+.cover-drop input{
+opacity:0;
+position:absolute;
+width:100%;
+height:100%;
+cursor:pointer;
+}
+.cover-drop{
+position:relative;
+}
+
+.creator-box{
+width:420px;
+background:linear-gradient(145deg,#070b1d,#0b1026);
+padding:30px;
+border-radius:18px;
+box-shadow:0 0 60px rgba(56,189,248,.4);
+animation:pop .4s ease;
+}
+
+@keyframes pop{
+from{transform:scale(.8);opacity:0}
+to{transform:scale(1);opacity:1}
+}
+
+.creator-box input,
+.creator-box textarea,
+.creator-box select{
+width:100%;
+padding:14px;
+margin-top:14px;
+border-radius:10px;
+border:none;
+background:#030617;
+color:white;
+}
+.coin-popup{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.85);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.coin-box{
+width:320px;
+background:#0b1026;
+padding:30px;
+border-radius:18px;
+text-align:center;
+box-shadow:0 0 40px rgba(56,189,248,.6);
+}
+
+.upi-circle{
+width:90px;
+height:90px;
+border-radius:50%;
+background:linear-gradient(90deg,#9333ea,#38bdf8);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:40px;
+margin:20px auto;
+}
+
+.loader{
+border:4px solid rgba(255,255,255,.1);
+border-top:4px solid #38bdf8;
+border-radius:50%;
+width:40px;
+height:40px;
+margin:20px auto;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+to{transform:rotate(360deg)}
+}
+
+/* COIN RAIN */
+
+.coin{
+position:fixed;
+top:-40px;
+font-size:26px;
+animation:fall 2s linear forwards;
+}
+
+@keyframes fall{
+to{transform:translateY(110vh);}
+}
+.creator-box button{
+margin-top:16px;
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+background:linear-gradient(90deg,#22c55e,#4ade80);
+font-weight:700;
+cursor:pointer;
+}
+
+.creator-step{display:none}
+.creator-step.active{display:block}
+
+.cover-drop{
+border:2px dashed #38bdf8;
+padding:40px;
+text-align:center;
+border-radius:12px;
+cursor:pointer;
+}
+
+#cPreview{
+width:100%;
+margin-top:12px;
+display:none;
+border-radius:12px;
+}
+
+.creator-close{
+margin-top:15px;
+background:#ef4444 !important;
+}
+.coin-rain{
+position:fixed;
+inset:0;
+pointer-events:none;
+overflow:hidden;
+z-index:99999;
+}
+
+.coin-drop{
+position:absolute;
+font-size:28px;
+opacity:0;
+animation:coinFall linear forwards;
+filter:drop-shadow(0 0 10px gold);
+}
+.coin{
+position:fixed;
+top:-40px;
+font-size:28px;
+pointer-events:none;
+z-index:99999;
+animation:coinFall linear forwards;
+}
+
+@keyframes coinFall{
+to{
+transform:translateY(110vh) rotate(720deg);
+opacity:.9;
+}
+}
+@keyframes coinFall{
+0%{
+transform:translateY(-100px) rotate(0deg) scale(.6);
+opacity:0;
+}
+10%{opacity:1;}
+100%{
+transform:translateY(110vh) rotate(720deg) scale(1);
+opacity:0;
+}
+}
+/* BUTTON PULSE */
+@keyframes pulse{
+  0%{box-shadow:0 0 10px rgba(34,197,94,.4);}
+  50%{box-shadow:0 0 25px rgba(34,197,94,1);}
+  100%{box-shadow:0 0 10px rgba(34,197,94,.4);}
+}
+.switch-btn{
+  animation:pulse 2s infinite;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+  <h2>📚 Dashboard</h2>
+  <button onclick="logout()">Logout</button>
+</header>
+
+<div class="container">
+
+  <!-- USER PROFILE -->
+  <div class="profile">
+    <div>
+      <h3 id="username">User</h3>
+      <p>Mode: <span id="role">reader</span></p>
+    </div>
+    <button class="switch-btn" onclick="switchMode()">Switch Mode</button>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat-box">
+      <h2 id="wallet">₹0</h2>
+      <p>Wallet Balance</p>
+      <div class="section">
+<h3>💰 Buy Coins</h3>
+
+<button class="switch-btn" onclick="openCoinPopup(50)">Buy ₹50</button>
+<button class="switch-btn" onclick="openCoinPopup(100)">Buy ₹100</button>
+<button class="switch-btn" onclick="openCoinPopup(500)">Buy ₹500</button>
+<div id="coinRain" class="coin-rain"></div>
+</div>
+    </div>
+    <div class="stat-box">
+      <h2 id="bookCount">0</h2>
+      <p>My Books</p>
+    </div>
+    <div class="stat-box">
+      <h2 id="libraryCount">0</h2>
+      <p>My Library</p>
+    </div>
+  </div>
+
+  <!-- AUTHOR BOOKS -->
+  <div class="section">
+    <h3>📖 My Books (Author)</h3>
+    <div class="grid" id="myBooks">
+      <p>Loading...</p>
+    </div>
+  </div>
+
+  <!-- UPLOAD NEW BOOK -->
+  <div class="section" id="uploadBookSection" style="display:none">
+    <h3>📤 Upload New Book</h3>
+
+    <div class="input-group">
+      <label>Book Title</label>
+      <input type="text" id="newBookTitle" placeholder="Enter book title">
+    </div>
+
+    <div class="input-group">
+      <label>Price (₹)</label>
+      <input type="number" id="newBookPrice" placeholder="0">
+    </div>
+
+    <div class="input-group">
+      <label>Book Type</label>
+      <select id="newBookType">
+        <option value="">Select type</option>
+        <option value="novel">Novel</option>
+        <option value="comic">Comic</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label>Cover Image</label>
+      <input type="file" id="newBookCover" accept="image/*" onchange="previewCover(event)">
+      <img id="coverPreview" src="">
+    </div>
+
+    <!-- 🔥 REQUIRED FILE INPUT -->
+    <div class="input-group">
+      <label>Book File (PDF / EPUB / ZIP / CBZ)</label>
+      <input type="file" id="newBookFile" accept=".pdf,.epub,.zip,.cbz">
+    </div>
+
+    <button class="switch-btn" onclick="uploadBook()">Upload Book</button>
+  </div>
+
+  <!-- READER LIBRARY -->
+  <div class="section">
+    <h3>🛒 My Library (Reader)</h3>
+    <div class="grid" id="myLibrary">
+      <p>Loading...</p>
+    </div>
+  </div>
+<!-- CHAPTERS -->
+<div class="section">
+  <h3>📄 My Books</h3>
+  <div class="grid" id="myChapters">
+    <p>Loading...</p>
+  </div>
+</div>
+
+</div>
+
+<nav>
+ 
+ 
+<a onclick="openCreator()">Create Book</a>
+
+  <a href="search.html">Search</a>
+  <a href="earnings.html">Earnings</a>
+  <a href="bank.html"> Bankdetails</a>
+</nav>
+
+<!-- JS -->
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/dashboard.js"></script>
+
+<script>
+
+/* ===============================
+OPEN / CLOSE MODAL
+=============================== */
+
+function openCreator(){
+const m=document.getElementById("creatorModal");
+if(m) m.style.display="flex";
+}
+
+function closeCreator(){
+document.getElementById("creatorModal").style.display="none";
+}
+function startCoinRain(total=40){
+
+for(let i=0;i<total;i++){
+
+setTimeout(()=>{
+
+const coin=document.createElement("div");
+coin.className="coin";
+coin.innerText="💸";   // change to 💰 if you want
+
+coin.style.left=Math.random()*100+"vw";
+coin.style.animationDuration=(1+Math.random()*2)+"s";
+
+document.body.appendChild(coin);
+
+setTimeout(()=>coin.remove(),3500);
+
+},i*40);
+
+}
+
+}
+function creatorNext(n){
+
+document.querySelectorAll(".creator-step")
+.forEach(s=>s.classList.remove("active"));
+
+document.getElementById("step"+n).classList.add("active");
+
+}
+function updateWalletAnimated(add){
+
+const wallet=document.getElementById("wallet");
+if(!wallet) return;
+
+/* SAFE CURRENT VALUE */
+
+let raw=(wallet.innerText||"0").replace(/[^\d]/g,"");
+let current=parseInt(raw)||0;
+
+let target=current+add;
+let i=current;
+
+const timer=setInterval(()=>{
+
+i+=Math.ceil((target-current)/20);
+
+wallet.innerText="₹"+Math.min(i,target);
+
+if(i>=target) clearInterval(timer);
+
+},30);
+
+}
+let selectedCoins=0;
+
+function openCoinPopup(amount){
+selectedCoins=amount;
+
+document.getElementById("coinPopup").style.display="flex";
+
+document.getElementById("coinStep1").style.display="block";
+document.getElementById("coinStep2").style.display="none";
+document.getElementById("coinStep3").style.display="none";
+document.getElementById("coinStep4").style.display="none";
+}
+
+/* BANK → QR */
+
+function nextQR(){
+
+document.getElementById("coinStep1").style.display="none";
+document.getElementById("coinStep2").style.display="block";
+
+/* fake scanning delay */
+
+setTimeout(()=>{
+document.getElementById("coinStep2").style.display="none";
+document.getElementById("coinStep3").style.display="block";
+},2000);
+
+}
+
+
+/* OTP VERIFY */
+
+function verifyOTP(){
+
+const otp=document.getElementById("fakeOtp").value;
+
+if(otp.length<4){
+alert("Enter OTP");
+return;
+}
+
+processPayment();
+
+}
+
+
+/* REAL COIN ADD */
+async function processPayment(){
+
+/* sound */
+new Audio("https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3").play();
+
+/* vibration */
+if(navigator.vibrate) navigator.vibrate(300);
+
+/* backend call */
+
+const res=await apiRequest("/wallet/fake-add","POST",{amount:selectedCoins});
+
+if(res.status!=="success"){
+alert(res.message);
+return;
+}
+
+/* receipt */
+
+document.getElementById("coinStep3").style.display="none";
+document.getElementById("coinStep4").style.display="block";
+
+document.getElementById("receiptAmount").innerText=
+"₹"+selectedCoins+" added to wallet";
+
+/* wallet animation */
+
+updateWalletAnimated(selectedCoins);
+
+/* ⭐⭐⭐ ADD THIS LINE ⭐⭐⭐ */
+
+startCoinRain(70);
+
+}
+/* FINISH */
+
+function finishCoins(){
+
+document.getElementById("coinPopup").style.display="none";
+
+/* reload dashboard to update history */
+
+if(typeof loadDashboard==="function") loadDashboard();
+
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+const drop=document.getElementById("coverDrop");
+const input=document.getElementById("cCover");
+const preview=document.getElementById("cPreview");
+
+if(!drop || !input) return;
+
+/* CLICK */
+drop.onclick=()=>input.click();
+
+/* FILE SELECT */
+input.onchange=e=>{
+
+const file=e.target.files[0];
+if(!file) return;
+
+showPreview(file);
+
+};
+
+/* DRAG SUPPORT */
+drop.ondragover=e=>{
+e.preventDefault();
+drop.style.borderColor="#22c55e";
+};
+
+drop.ondragleave=()=>{
+drop.style.borderColor="#38bdf8";
+};
+
+drop.ondrop=e=>{
+e.preventDefault();
+
+const file=e.dataTransfer.files[0];
+if(!file) return;
+
+input.files=e.dataTransfer.files;
+showPreview(file);
+};
+
+
+/* PREVIEW FUNCTION */
+function showPreview(file){
+
+const reader=new FileReader();
+
+reader.onload=x=>{
+preview.src=x.target.result;
+preview.style.display="block";
+};
+
+reader.readAsDataURL(file);
+
+}
+
+});
+
+
+/* ===============================
+SUBMIT BOOK  ⭐ GLOBAL
+=============================== */
+
+async function submitCreator(){
+
+const title=document.getElementById("cTitle").value.trim();
+const desc=document.getElementById("cDesc").value.trim();
+const type=document.getElementById("cType").value;
+const price=document.getElementById("cPrice").value||0;
+const cover=document.getElementById("cCover").files[0];
+const bookFile=document.getElementById("newBookFile")?.files?.[0];
+if(bookFile) fd.append("book_file",bookFile);
+if(!title || !type){
+alert("Title + type required");
+return;
+}
+
+const fd=new FormData();
+
+fd.append("title",title);
+fd.append("description",desc);
+fd.append("type",type);
+fd.append("price",price);
+
+if(cover) fd.append("cover_image",cover);
+
+/* uses your existing dashboard.js apiRequest */
+const res=await apiRequest("/books/create","POST",fd);
+
+if(res.status!=="success"){
+alert(res.message);
+return;
+}
+
+alert("🚀 Book created!");
+
+closeCreator();
+location.reload();
+
+}
+
+
+/* ===============================
+CLICK OUTSIDE CLOSE
+=============================== */
+
+window.onclick=function(e){
+const modal=document.getElementById("creatorModal");
+if(e.target===modal) modal.style.display="none";
+};
+
+</script>
+
+
+<div id="creatorModal" class="creator-modal">
+
+  <div class="creator-box">
+
+    <h2>📚 Create New Book</h2>
+
+    <!-- STEP 1 -->
+    <div class="creator-step active" id="step1">
+      <input id="cTitle" placeholder="Book title">
+      <textarea id="cDesc" placeholder="Description (optional)"></textarea>
+      <button onclick="creatorNext(2)">Next →</button>
+    </div>
+
+
+    <!-- STEP 2 (COVER) -->
+    <div class="creator-step" id="step2">
+
+      <div id="coverDrop" class="cover-drop">
+
+        Drag Cover Here or Click
+
+        <input type="file" id="cCover" accept="image/*">
+
+      </div>
+
+      <img id="cPreview" style="
+        width:100%;
+        margin-top:15px;
+        display:none;
+        border-radius:12px;
+        box-shadow:0 0 20px rgba(56,189,248,.6);
+      ">
+
+      <button onclick="creatorNext(3)">Next →</button>
+
+    </div>
+
+
+    <!-- STEP 3 -->
+    <div class="creator-step" id="step3">
+
+      <select id="cType">
+        <option value="">Select type</option>
+        <option value="novel">Novel</option>
+        <option value="comic">Comic</option>
+      </select>
+
+      <input id="cPrice" type="number" placeholder="Price (₹)">
+
+      <button onclick="submitCreator()">🚀 Create Book</button>
+
+    </div>
+
+
+    <!-- CLOSE -->
+    <button class="creator-close" onclick="closeCreator()">✖ Close</button>
+
+  </div>
+
+</div>
+<div id="coinPopup" class="coin-popup">
+
+<div class="coin-box" id="coinStep1">
+
+<h2>Select Bank</h2>
+
+<button onclick="nextQR()">🏦 State Bank</button>
+<button onclick="nextQR()">🏦 HDFC Bank</button>
+<button onclick="nextQR()">🏦 ICICI</button>
+
+</div>
+
+
+<div class="coin-box" id="coinStep2" style="display:none">
+
+<h2>Scan QR to Pay</h2>
+
+<div class="upi-circle" style="font-size:50px">📱</div>
+
+<div style="font-size:14px">Opening UPI...</div>
+
+<div class="loader"></div>
+
+</div>
+
+
+<div class="coin-box" id="coinStep3" style="display:none">
+
+<h2>Enter OTP</h2>
+
+<input id="fakeOtp" placeholder="123456"
+style="padding:12px;width:100%;border-radius:10px;border:none">
+
+<button onclick="verifyOTP()">Verify Payment</button>
+
+</div>
+
+
+<div class="coin-box" id="coinStep4" style="display:none">
+
+<h2 style="color:#22c55e">Payment Success</h2>
+
+<div style="font-size:60px">✅</div>
+
+<p id="receiptAmount"></p>
+
+<button onclick="finishCoins()">Done</button>
+
+</div>
+
+</div>
+<!-- DELETE MODAL -->
+<div id="deleteModal" style="
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.85);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:99999;
+">
+
+<div id="deleteBox" style="
+width:420px;
+background:#070b1d;
+border-radius:18px;
+padding:25px;
+text-align:center;
+box-shadow:0 0 60px rgba(239,68,68,.7);
+animation:pop .35s ease;
+">
+
+<h2 style="color:#ef4444">⚠ Delete Book</h2>
+
+<img id="deleteCover"
+style="width:160px;border-radius:12px;margin:15px 0;">
+
+<p style="color:#cbd5f5">
+This action is permanent.<br>
+You cannot undo this.
+</p>
+
+<button onclick="confirmDeleteBook()" style="
+background:#ef4444;
+color:white;
+padding:14px;
+width:100%;
+border:none;
+border-radius:12px;
+font-weight:700;
+margin-top:12px;
+cursor:pointer;
+">
+DELETE PERMANENTLY
+</button>
+
+<button onclick="closeDeleteModal()" style="
+margin-top:10px;
+background:#1e293b;
+color:white;
+padding:12px;
+width:100%;
+border:none;
+border-radius:12px;
+cursor:pointer;
+">
+Cancel
+</button>
+
+</div>
+</div>
+
+<style>
+@keyframes pop{
+  from{transform:scale(.85);opacity:.2}
+  to{transform:scale(1);opacity:1}
+}
+</style>
+
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login | PageVerse</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+body{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:
+    linear-gradient(rgba(5,8,22,.8),rgba(5,8,22,.9)),
+    url("../images/slide1.jpg") center/cover no-repeat;
+  color:white;
+}
+
+/* LOGIN BOX */
+.login-box{
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(20px);
+  padding:50px;
+  border-radius:25px;
+  width:360px;
+  box-shadow:0 0 40px rgba(99,102,241,.6);
+  animation:float 6s ease-in-out infinite;
+}
+.login-box h2{
+  text-align:center;
+  font-size:36px;
+  font-weight:800;
+  background:linear-gradient(90deg,#38bdf8,#a78bfa,#22c55e);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+.login-box p{
+  text-align:center;
+  margin:10px 0 25px;
+  color:#c7d2fe;
+}
+
+/* INPUTS */
+.input-group{
+  margin-bottom:18px;
+}
+.input-group input{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:30px;
+  outline:none;
+  font-size:14px;
+  background:rgba(255,255,255,0.15);
+  color:white;
+}
+.input-group input::placeholder{
+  color:#e5e7eb;
+}
+
+/* BUTTON */
+.login-btn{
+  width:100%;
+  padding:14px;
+  border-radius:30px;
+  border:none;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  background:linear-gradient(90deg,#22c55e,#4ade80);
+  box-shadow:0 0 20px rgba(34,197,94,.8);
+  transition:.3s;
+}
+.login-btn:hover{
+  transform:translateY(-3px) scale(1.03);
+}
+
+/* LINKS */
+.links{
+  text-align:center;
+  margin-top:20px;
+}
+.links a{
+  color:#38bdf8;
+  text-decoration:none;
+  font-size:14px;
+}
+.links a:hover{
+  text-decoration:underline;
+}
+
+/* BACK BUTTON */
+.back-btn{
+  position:absolute;
+  top:20px;
+  left:20px;
+  background:linear-gradient(90deg,#3b82f6,#60a5fa);
+  border:none;
+  padding:10px 20px;
+  border-radius:25px;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 0 15px rgba(59,130,246,.7);
+}
+
+/* ANIMATION */
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
+}
+</style>
+</head>
+<body>
+
+<button class="back-btn" onclick="goHome()">⬅ Home</button>
+
+<div class="login-box">
+  <h2>Welcome Back</h2>
+  <p>Login to continue reading & writing</p>
+
+  <div class="input-group">
+    <input type="email" id="email" placeholder="Email" required>
+  </div>
+  <div class="input-group">
+    <input type="password" id="password" placeholder="Password" required>
+  </div>
+
+  <button class="login-btn" onclick="login()">Login</button>
+
+  <div class="links">
+    <p>Don't have an account?
+      <a href="register.html">Register</a>
+    </p>
+  </div>
+</div>
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+function goHome(){
+  window.location.href="index.html";
+}
+</script>
+
+</body>
+</html>

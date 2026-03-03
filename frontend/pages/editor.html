@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Creator Studio | PageVerse</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+<!-- ✅ LOCAL jsPDF (NO CDN) -->
+<script src="../js/jspdf.umd.min.js"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{background:#050816;color:white}
+
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 30px;
+  background:#020617;
+  box-shadow:0 5px 20px rgba(0,0,0,.5);
+}
+header h2{
+  background:linear-gradient(90deg,#38bdf8,#a78bfa,#22c55e);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+header a{
+  color:white;
+  text-decoration:none;
+  background:linear-gradient(90deg,#3b82f6,#60a5fa);
+  padding:8px 18px;
+  border-radius:20px;
+}
+
+/* LAYOUT */
+.container{padding:25px;max-width:1200px;margin:auto;}
+.section{
+  background:rgba(255,255,255,.08);
+  padding:20px;
+  border-radius:20px;
+  margin-bottom:25px;
+  box-shadow:0 0 20px rgba(56,189,248,.15);
+}
+.section h3{
+  border-left:5px solid #38bdf8;
+  padding-left:10px;
+  margin-bottom:15px;
+}
+
+/* INPUTS */
+.input-group{margin-bottom:12px;}
+.input-group label{display:block;margin-bottom:6px;color:#c7d2fe;}
+.input-group input,
+.input-group textarea,
+.input-group select{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  background:rgba(255,255,255,.15);
+  color:white;
+  outline:none;
+}
+
+/* BUTTONS */
+.btn{
+  padding:10px 22px;
+  border:none;
+  border-radius:25px;
+  font-weight:600;
+  cursor:pointer;
+}
+.btn-primary{background:linear-gradient(90deg,#22c55e,#4ade80);color:black;}
+.btn-secondary{background:linear-gradient(90deg,#3b82f6,#60a5fa);color:white;}
+.btn-danger{background:linear-gradient(90deg,#ef4444,#f87171);color:white;}
+
+/* TOOLBAR */
+.toolbar{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
+.toolbar button{background:#1e293b;color:white;border:none;padding:6px 10px;border-radius:6px}
+
+/* NOVEL */
+#novelEditor{
+  background:white;
+  color:black;
+  min-height:250px;
+  padding:15px;
+  border-radius:10px;
+  overflow:auto;
+}
+
+/* COMIC */
+#canvasBox{border:2px dashed #38bdf8;border-radius:10px;overflow:hidden}
+canvas{background:white;cursor:crosshair}
+
+/* PREVIEW */
+.preview{display:flex;flex-wrap:wrap;gap:10px}
+.preview img{width:120px;height:160px;object-fit:cover;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,.6)}
+
+/* ACTIONS */
+.actions{display:flex;justify-content:center;gap:20px;margin-top:10px}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>✍ Creator Studio</h2>
+  <a href="dashboard.html">Dashboard</a>
+</header>
+
+<div class="container">
+
+<!-- BOOK INFO -->
+<div class="section">
+<h3>📘 Book Info</h3>
+
+<div class="input-group">
+<label>Book ID</label>
+<input type="number" id="bookId">
+</div>
+
+<div class="input-group">
+<label>Chapter Title</label>
+<input type="text" id="chapterTitle">
+</div>
+
+<div class="input-group">
+<label>Chapter No</label>
+<input type="number" id="chapterNo" value="1">
+</div>
+
+<div class="input-group">
+<label>Price</label>
+<input type="number" id="price" value="0">
+</div>
+
+<div class="input-group">
+<label>Mode</label>
+<select id="mode">
+<option value="novel">Novel</option>
+<option value="comic">Comic / Manga</option>
+</select>
+</div>
+</div>
+
+<!-- NOVEL MODE -->
+<div class="section" id="novelSection">
+<h3>📖 Novel Editor</h3>
+<div class="toolbar">
+<button onclick="format('bold')">B</button>
+<button onclick="format('italic')">I</button>
+<button onclick="format('underline')">U</button>
+<button onclick="format('insertUnorderedList')">List</button>
+</div>
+<div id="novelEditor" contenteditable="true"></div>
+</div>
+
+<!-- COMIC MODE -->
+<div class="section" id="comicSection" style="display:none">
+<h3>🎨 Comic Studio</h3>
+
+<div class="toolbar">
+<input type="color" id="colorPicker" value="#000000">
+<input type="range" id="brushSize" min="1" max="20" value="3">
+<button onclick="setTool('pen')">✏ Pen</button>
+<button onclick="setTool('eraser')">🧽 Eraser</button>
+<button onclick="clearCanvas()">Clear</button>
+<button onclick="undo()">↩ Undo</button>
+<button onclick="savePage()">Save Page</button>
+</div>
+
+<div id="canvasBox">
+<canvas id="drawCanvas" width="800" height="1000"></canvas>
+</div>
+
+<div class="input-group">
+<label>Upload image to draw on</label>
+<input type="file" id="bgImage" accept="image/*">
+</div>
+
+<div class="preview" id="comicPreview"></div>
+</div>
+
+<!-- ACTIONS -->
+<div class="section">
+<h3>💾 Actions</h3>
+<div class="actions">
+<button class="btn btn-primary" onclick="saveChapter()">Save Chapter</button>
+<button class="btn btn-secondary" onclick="exportPDF()">Download PDF</button>
+</div>
+</div>
+
+</div>
+
+
+
+<!-- Load scripts in correct order (jspdf already loaded in head) -->
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/editor.js"></script>
+
+</body>
+</html>

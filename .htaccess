@@ -1,0 +1,43 @@
+RewriteEngine On
+
+# ============================
+# ALWAYS PASS API FIRST
+# ============================
+
+RewriteRule ^api/(.*)$ backend/public/$1 [L,QSA]
+
+# ============================
+# BLOCK DIRECT BACKEND ACCESS
+# ============================
+
+RewriteCond %{REQUEST_URI} !^/ebook-platform/backend/public/ [NC]
+RewriteRule ^backend/(.*)$ - [F]
+
+# ============================
+# ALLOW REAL FILES (VERY IMPORTANT)
+# ============================
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# ============================
+# FRONTEND ROUTES
+# ============================
+
+RewriteRule ^$ frontend/pages/index.html [L]
+RewriteRule ^login/?$ frontend/pages/login.html [L]
+RewriteRule ^register/?$ frontend/pages/register.html [L]
+RewriteRule ^dashboard/?$ frontend/pages/dashboard.html [L]
+RewriteRule ^editor/?$ frontend/pages/editor.html [L]
+RewriteRule ^reader/?$ frontend/pages/reader.html [L]
+RewriteRule ^search/?$ frontend/pages/search.html [L]
+RewriteRule ^bank/?$ frontend/pages/bank.html [L]
+RewriteRule ^earnings/?$ frontend/pages/earnings.html [L]
+RewriteRule ^payments/?$ frontend/pages/payments.html [L]
+
+# ============================
+# FALLBACK SPA
+# ============================
+
+RewriteRule ^ frontend/pages/index.html [L]

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Search Books | PageVerse</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+/* RESET + BODY */
+* {margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif;}
+body {
+  background: url('https://images.unsplash.com/photo-1601933471266-5e416317aa21?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  min-height: 100vh;
+}
+body::before {
+  content:"";
+  position:fixed;
+  top:0; left:0; right:0; bottom:0;
+  background: rgba(5,8,22,0.75);
+  z-index: -1;
+}
+
+/* HEADER */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: rgba(5,8,22,0.85);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+header h2 {
+  font-size: 1.8rem;
+  background: linear-gradient(90deg,#38bdf8,#a78bfa,#22c55e);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradient 4s ease infinite;
+}
+@keyframes gradient {
+  0%,100% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+}
+header a {
+  color:white;
+  text-decoration:none;
+  background: linear-gradient(90deg,#3b82f6,#60a5fa);
+  padding: 10px 20px;
+  border-radius:25px;
+  font-weight:600;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+header a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+/* SEARCH BAR */
+.search-box {
+  margin:30px auto;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  animation: fadeIn 1s ease;
+}
+.search-box input {
+  width:320px;
+  padding:14px 20px;
+  border-radius:25px;
+  border:none;
+  outline:none;
+  font-size:1rem;
+  background: rgba(255,255,255,0.1);
+  color:white;
+  transition: all 0.3s ease;
+}
+.search-box input:focus {
+  background: rgba(255,255,255,0.2);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.search-box button {
+  padding:14px 22px;
+  border-radius:25px;
+  border:none;
+  cursor:pointer;
+  background: linear-gradient(90deg,#22c55e,#4ade80);
+  font-weight:600;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.search-box button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+/* BOOK GRID */
+.grid {
+  padding:20px 40px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
+}
+
+/* BOOK CARD */
+.card {
+  background: rgba(255,255,255,0.08);
+  border-radius:20px;
+  padding:10px;
+  text-align:center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeIn 0.5s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+.card img {
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:15px;
+  transition: transform 0.3s ease;
+}
+.card img:hover {transform: scale(1.05);}
+.card h4 {margin:8px 0; font-size:1.1rem;}
+.card p {font-size:13px;color:#c7d2fe; height:36px; overflow:hidden;}
+.card button {
+  margin-top:10px;
+  padding:8px 14px;
+  border:none;
+  border-radius:25px;
+  background: linear-gradient(90deg,#3b82f6,#60a5fa);
+  color:white;
+  cursor:pointer;
+  font-weight:600;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+.price {
+  color:#22c55e;
+  font-weight:600;
+  margin-top:5px;
+}
+
+/* SKELETON LOADER */
+.skeleton {
+  background: rgba(255,255,255,0.1);
+  border-radius:15px;
+  width:100%;
+  height:250px;
+  position: relative;
+  overflow: hidden;
+  animation: pulse 1.5s infinite;
+}
+.skeleton::after {
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background: linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
+  animation: loading 1.5s infinite;
+}
+@keyframes pulse {
+  0%,100% {opacity:0.6;}
+  50% {opacity:1;}
+}
+@keyframes loading {
+  0% {left:-100%;}
+  100% {left:100%;}
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from {opacity:0; transform: translateY(20px);}
+  to {opacity:1; transform: translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>🔍 Search Books</h2>
+  <a href="dashboard.html">Dashboard</a>
+</header>
+
+<div class="search-box">
+  <input 
+    type="text" 
+    id="query" 
+    placeholder="Search manga, novels, authors..." 
+    autofocus
+    onkeydown="if(event.key==='Enter'){searchBooks();}"
+  >
+  <button onclick="searchBooks()">Search</button>
+</div>
+
+<div class="grid" id="results"></div>
+
+<script src="../js/api.js"></script>
+<script src="../js/search.js"></script>
+
+
+</body>
+
+</html>

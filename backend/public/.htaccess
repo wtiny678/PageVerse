@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# allow direct access to file.php
+RewriteCond %{REQUEST_URI} !^/ebook-platform/backend/public/file\.php$
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^ index.php [QSA,L]

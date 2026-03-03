@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Register | MangaVerse</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:
+linear-gradient(rgba(5,8,22,.8),rgba(5,8,22,.9)),
+url("../images/slide2.jpg") center/cover no-repeat;
+color:white;
+}
+
+/* BOX */
+.register-box{
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(20px);
+padding:45px;
+border-radius:25px;
+width:380px;
+box-shadow:0 0 40px rgba(99,102,241,.6);
+}
+
+.register-box h2{
+text-align:center;
+font-size:34px;
+font-weight:800;
+background:linear-gradient(90deg,#38bdf8,#a78bfa,#22c55e);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.register-box p{text-align:center;margin:10px 0 20px;color:#c7d2fe;}
+
+/* INPUT */
+.input-group{margin-bottom:14px;}
+
+.input-group input,
+.input-group select{
+width:100%;
+padding:13px;
+border:none;
+border-radius:30px;
+outline:none;
+font-size:14px;
+background:rgba(255,255,255,0.15);
+color:white;
+}
+
+.input-group select option{
+color:black;
+}
+
+.input-group input::placeholder{color:#e5e7eb;}
+
+/* BUTTON */
+.register-btn{
+width:100%;
+padding:14px;
+border-radius:30px;
+border:none;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+background:linear-gradient(90deg,#3b82f6,#60a5fa);
+box-shadow:0 0 20px rgba(59,130,246,.8);
+transition:.3s;
+}
+
+.register-btn:hover{
+transform:translateY(-3px) scale(1.03);
+}
+
+/* LINKS */
+.links{text-align:center;margin-top:15px;}
+
+.links a{color:#38bdf8;text-decoration:none;font-size:14px;}
+
+.links a:hover{text-decoration:underline;}
+
+/* BACK BUTTON */
+.back-btn{
+position:absolute;
+top:20px;
+left:20px;
+background:linear-gradient(90deg,#22c55e,#4ade80);
+border:none;
+padding:10px 20px;
+border-radius:25px;
+color:white;
+font-weight:600;
+cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<button class="back-btn" onclick="goHome()">⬅ Home</button>
+
+<div class="register-box">
+
+<h2>Create Account</h2>
+<p>Join and start reading & writing</p>
+
+<div class="input-group">
+<input type="text" id="name" placeholder="Full Name">
+</div>
+
+<div class="input-group">
+<input type="email" id="email" placeholder="Email">
+</div>
+
+<div class="input-group">
+<input type="password" id="password" placeholder="Password">
+</div>
+
+<div class="input-group">
+<select id="role">
+<option value="">Select Role</option>
+<option value="reader">Reader</option>
+<option value="author">Author</option>
+</select>
+</div>
+
+<button id="regBtn" class="register-btn" onclick="register()">Register</button>
+
+<div class="links">
+<p>Already have an account?
+<a href="login.html">Login</a>
+</p>
+</div>
+
+</div>
+
+
+<script src="../js/api.js"></script>
+
+<script>
+
+function goHome(){
+window.location.href="index.html";
+}
+
+/* ======================
+   REGISTER FUNCTION
+====================== */
+
+async function register(){
+
+const btn=document.getElementById("regBtn");
+
+const name=document.getElementById("name").value.trim();
+const email=document.getElementById("email").value.trim();
+const password=document.getElementById("password").value.trim();
+const role=document.getElementById("role").value;
+
+if(!name||!email||!password||!role){
+alert("Fill all fields");
+return;
+}
+
+btn.innerText="Creating...";
+btn.disabled=true;
+
+const res=await apiRequest("/auth/register","POST",{
+name,email,password,role
+});
+
+btn.innerText="Register";
+btn.disabled=false;
+
+if(res.status==="success"){
+alert("Account created!");
+window.location.href="login.html";
+}else{
+alert(res.message||"Registration failed");
+}
+
+}
+
+</script>
+
+</body>
+</html>

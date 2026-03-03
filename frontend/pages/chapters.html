@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Pro Chapter Manager</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+  background:#030617;
+  color:white;
+  font-family:Poppins;
+  padding:30px;
+}
+
+h2{
+  background:linear-gradient(90deg,#38bdf8,#a78bfa);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:#0b1026;
+  padding:18px;
+  border-radius:14px;
+  border:1px solid rgba(56,189,248,.3);
+  box-shadow:0 0 18px rgba(56,189,248,.25);
+  cursor:grab;
+}
+
+.card.dragging{ opacity:.4; }
+
+button{
+  border:none;
+  padding:7px 11px;
+  border-radius:8px;
+  cursor:pointer;
+  margin:3px;
+  font-size:12px;
+}
+
+.edit{background:#38bdf8;color:black;}
+.delete{background:#ef4444;color:white;}
+.read{background:#22c55e;color:black;}
+.publish{background:#a78bfa;color:black;}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:25px;
+}
+
+.small{
+  opacity:.7;
+  font-size:13px;
+}
+
+.top button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 16px rgba(56,189,248,.7);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="top">
+
+<div style="display:flex;gap:12px;align-items:center;">
+
+<button onclick="location.href='dashboard.html'" style="
+background:linear-gradient(90deg,#38bdf8,#6366f1);
+padding:10px 18px;
+border-radius:12px;
+font-weight:700;">
+⬅ Dashboard
+</button>
+
+<h2 style="margin:0;">📄 Chapter Manager</h2>
+
+</div>
+
+<button onclick="createChapter()" style="
+background:linear-gradient(90deg,#22c55e,#4ade80);
+padding:10px 18px;border-radius:12px;font-weight:700;">
++ Add Chapter
+</button>
+
+</div>
+
+<!-- ⭐ THIS WAS MISSING -->
+<div class="grid" id="chapterList"></div>
+
+<script src="../js/api.js"></script>
+
+<script>
+
+const bookId=new URLSearchParams(location.search).get("book_id");
+
+if(!bookId){
+  alert("Missing book id");
+  location.href="dashboard.html";
+}
+
+let chapters=[];
+
+loadChapters();
+
+async function loadChapters(){
+
+  const res=await apiRequest("/chapters/my?book_id="+bookId);
+
+  chapters=res.data||[];
+
+  render();
+}
+
+function render(){
+
+  const c=document.getElementById("chapterList");
+  c.innerHTML="";
+
+  if(!chapters.length){
+    c.innerHTML="<p>No chapters yet</p>";
+    return;
+  }
+
+  chapters.sort((a,b)=>a.chapter_no-b.chapter_no);
+
+  chapters.forEach(ch=>{
+
+    const div=document.createElement("div");
+    div.className="card";
+    div.draggable=true;
+    div.dataset.id=ch.id;
+
+    div.innerHTML=`
+      <h3>${ch.title}</h3>
+
+      <div class="small">
+      Chapter #${ch.chapter_no}<br>
+      Price ₹${ch.price}<br>
+      Earnings ₹${ch.earnings||0}
+      </div>
+
+      <button class="edit">✍ Edit</button>
+      <button class="read">📖 Preview</button>
+      <button class="publish">
+        ${ch.published? "🟢 Published":"⚫ Draft"}
+      </button>
+      <button class="delete">🗑 Delete</button>
+    `;
+
+    const b=div.querySelectorAll("button");
+
+    b[0].onclick=()=>editChapter(ch.id);
+
+    // ⭐ PREVIEW → OPENS READER CORRECTLY
+    b[1].onclick=()=>location.href=`reader.html?book_id=${bookId}&preview_chapter=${ch.id}`;
+
+    b[2].onclick=()=>togglePublish(ch.id);
+    b[3].onclick=()=>deleteChapter(ch.id);
+
+    addDrag(div);
+
+    c.appendChild(div);
+  });
+}
+
+function addDrag(el){
+
+  el.addEventListener("dragstart",()=>el.classList.add("dragging"));
+
+  el.addEventListener("dragend",()=>{
+    el.classList.remove("dragging");
+    saveOrder();
+  });
+
+  document.getElementById("chapterList").addEventListener("dragover",e=>{
+    e.preventDefault();
+
+    const dragging=document.querySelector(".dragging");
+    const after=getAfter(e.clientY);
+
+    if(after==null)
+      e.currentTarget.appendChild(dragging);
+    else
+      e.currentTarget.insertBefore(dragging,after);
+  });
+}
+
+function getAfter(y){
+
+  const els=[...document.querySelectorAll(".card:not(.dragging)")];
+
+  return els.reduce((closest,child)=>{
+
+    const box=child.getBoundingClientRect();
+    const offset=y-box.top-box.height/2;
+
+    if(offset<0 && offset>closest.offset)
+      return {offset,element:child};
+    else return closest;
+
+  },{offset:-999}).element;
+}
+
+async function saveOrder(){
+
+  const ids=[...document.querySelectorAll(".card")]
+    .map((c,i)=>({id:c.dataset.id,chapter_no:i+1}));
+
+  await apiRequest("/chapters/reorder","POST",{chapters:ids});
+}
+
+function createChapter(){
+  location.href="editor.html?book_id="+bookId;
+}
+
+function editChapter(id){
+  location.href="editor.html?chapter_id="+id+"&book_id="+bookId;
+}
+
+async function deleteChapter(id){
+
+  if(!confirm("Delete chapter?")) return;
+
+  await apiRequest("/chapters/delete","POST",{id});
+  loadChapters();
+}
+
+async function togglePublish(id){
+
+  await apiRequest("/chapters/toggle","POST",{id});
+  loadChapters();
+}
+
+</script>
+
+</body>
+</html>
